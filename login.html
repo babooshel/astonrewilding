@@ -1,0 +1,18 @@
+<form id="login">
+  <input type="email" id="email" required>
+  <input type="password" id="password" required>
+  <button>Login</button>
+</form>
+
+<script type="module">
+import { supabase } from "/js/supabase.js";
+
+login.onsubmit = async e => {
+  e.preventDefault();
+  await supabase.auth.signInWithPassword({
+    email: email.value,
+    password: password.value
+  });
+  location.href = "/admin.html";
+};
+</script>
