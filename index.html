@@ -1,84 +1,59 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aston Rewilding Hub</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#updates">Updates</a></li>
+      <li><button id="admin-btn">Admin</button></li>
+    </ul>
+  </nav>
 
-<nav class="top-nav">
-  <div class="logo">Aston Rewilding</div>
-  <div class="links">
-    <a href="#hero">Home</a>
-    <a href="#about">About</a>
-    <a href="#events">Events</a>
-    <a href="#updates">Updates</a>
-    <button id="adminBtn">Admin</button>
+  <!-- Hero Section -->
+  <section id="hero">
+    <h1>Aston Rewilding Hub</h1>
+    <p>Connecting the community to nature and wildlife.</p>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>We are a local rewilding project near Aston, Birmingham, focused on restoring biodiversity and green spaces.</p>
+  </section>
+
+  <!-- Events Section -->
+  <section id="events">
+    <h2>Upcoming Events</h2>
+    <div id="events-container"></div>
+  </section>
+
+  <!-- Updates Section -->
+  <section id="updates">
+    <h2>Latest Updates</h2>
+    <div id="updates-container"></div>
+  </section>
+
+  <!-- Admin Login Modal -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Admin Login</h2>
+      <input type="email" id="login-email" placeholder="Email">
+      <input type="password" id="login-password" placeholder="Password">
+      <button id="login-submit">Login</button>
+    </div>
   </div>
-</nav>
 
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-content">
-    <h1 id="hero_title"></h1>
-    <p id="hero_sub"></p>
-    <p id="hero_desc"></p>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <h2>About the Project</h2>
-  <div class="card" id="about"></div>
-</section>
-
-<!-- EVENTS -->
-<section id="events">
-  <h2>Upcoming Events</h2>
-  <div id="eventsList"></div>
-</section>
-
-<!-- ANNOUNCEMENT -->
-<section id="updates">
-  <h2>Latest Updates</h2>
-  <div class="card" id="announcement"></div>
-</section>
-
-<!-- INLINE ADMIN LOGIN -->
-<div id="adminLoginModal" class="modal hidden">
-  <h3>Admin Login</h3>
-  <input id="loginEmail" type="email" placeholder="Email">
-  <input id="loginPassword" type="password" placeholder="Password">
-  <button id="loginBtn">Login</button>
-  <button id="closeLogin">Close</button>
-</div>
-
-<script type="module" src="/js/public.js"></script>
-<script type="module">
-  import { supabase } from './js/supabase.js';
-
-  const adminBtn = document.getElementById("adminBtn");
-  const modal = document.getElementById("adminLoginModal");
-  const closeBtn = document.getElementById("closeLogin");
-  const loginBtn = document.getElementById("loginBtn");
-
-  adminBtn.onclick = () => modal.classList.remove("hidden");
-  closeBtn.onclick = () => modal.classList.add("hidden");
-
-  loginBtn.onclick = async () => {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) alert(error.message);
-    else {
-      modal.classList.add("hidden");
-      alert("Logged in! Redirecting to Admin Panel...");
-      window.location.href = "/admin.html";
-    }
-  };
-</script>
-
+  <script type="module" src="js/supabase.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

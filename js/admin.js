@@ -1,70 +1,77 @@
-import { supabase } from "./supabase.js";
+import { supabase } from './supabase.js';
 
-// 1️⃣ Check admin role
-const { data: { user } } = await supabase.auth.getUser();
-if (!user) location.href = "/";
-
-const { data: profile } = await supabase
-  .from("profiles")
-  .select("role")
-  .eq("id", user.id)
-  .single();
-
-if (!profile || profile.role !== "admin") {
-  document.body.innerHTML = "<h1>Access denied</h1>";
-  throw new Error("Not admin");
-}
-
-// 2️⃣ Load content
-const { data: content } = await supabase.from("content").select("*");
-content.forEach(c => {
-  const el = document.getElementById(c.key);
-  if (el) el.value = c.value;
-});
-
-// 3️⃣ Save content
-document.getElementById("saveContent").onclick = async () => {
-  for (const c of content) {
-    await supabase
-      .from("content")
-      .update({ value: document.getElementById(c.key).value })
-      .eq("key", c.key);
+document.addEventListener('DOMContentLoaded', async () => {
+  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError || !session) {
+    alert("You must be logged in as admin.");
+    window.location.href = "/";
+    return;
   }
-  alert("All content saved!");
-};
 
-// 4️⃣ Load events
-async function loadEvents() {
-  const { data: events } = await supabase
-    .from("events")
-    .select("*")
-    .order("created_at", { ascending: false });
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', session.user.id)
+    .single();
 
-  document.getElementById("eventsList").innerHTML =
-    events.map(e => `
-      <div class="card">
-        <h4>${e.title}</h4>
-        <strong>${e.date}</strong>
-        <p>${e.description}</p>
-      </div>
-    `).join("");
-}
-await loadEvents();
+  if (profileError || profile.role !== 'admin') {
+    alert("Access denied: Not an admin.");
+    window.location.href = "/";
+    return;
+  }
 
-// 5️⃣ Add event
-document.getElementById("addEvent").onclick = async () => {
-  const title = document.getElementById("title").value;
-  const date = document.getElementById("date").value;
-  const description = document.getElementById("description").value;
+  // Show admin panel
+  document.getElementById('admin-panel').style.display = 'block';
 
-  if (!title || !date || !description) return alert("All fields are required!");
+  // Load events
+  const { data: events } = await supabase.from('events').select('*').order('date', { ascending: true });
+  const eventsContainer = document.getElementById('admin-events');
+  eventsContainer.innerHTML = '';
+  events.forEach(e => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <h4>${e.title}</h4>
+      <p>${e.date}</p>
+      <p>${e.description}</p>
+      <button data-id="${e.id}" class="edit-event">Edit</button>
+      <button data-id="${e.id}" class="delete-event">Delete</button>
+    `;
+    eventsContainer.appendChild(div);
+  });
 
-  await supabase.from("events").insert({ title, date, description });
+  // Add event handlers
+  document.addEventListener('click', async (ev) => {
+    if (ev.target.classList.contains('delete-event')) {
+      const id = ev.target.dataset.id;
+      await supabase.from('events').delete().eq('id', id);
+      location.reload();
+    }
+    if (ev.target.classList.contains('edit-event')) {
+      const id = ev.target.dataset.id;
+      const newTitle = prompt("New title?");
+      if (newTitle) await supabase.from('events').update({ title: newTitle }).eq('id', id);
+      location.reload();
+    }
+  });
 
-  document.getElementById("title").value = "";
-  document.getElementById("date").value = "";
-  document.getElementById("description").value = "";
+  // Add update/event buttons
+  document.getElementById('add-event-btn')?.addEventListener('click', async () => {
+    const title = prompt("Event title?");
+    const date = prompt("Event date?");
+    const description = prompt("Event description?");
+    if (title && date && description) await supabase.from('events').insert([{ title, date, description }]);
+    location.reload();
+  });
 
-  await loadEvents();
-  alert("Event added!");
-};
+  document.getElementById('add-update-btn')?.addEventListener('click', async () => {
+    const content = prompt("Update content?");
+    if (content) await supabase.from('updates').insert([{ content }]);
+    location.reload();
+  });
+
+  // Logout
+  document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    window.location.href = "/";
+  });
+});
