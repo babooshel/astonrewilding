@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aston Rewilding Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 
   <!-- Netlify Identity -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -14,28 +14,19 @@
 
 <header class="hero">
   <h1>Aston Rewilding Hub</h1>
-  <p>Rewilding and restoring nature near Aston, Birmingham</p>
+  <p>Community-led rewilding in Aston, Birmingham</p>
   <a href="#events" class="btn">View Events</a>
 </header>
 
-<section class="section">
+<section id="about">
   <h2>About</h2>
   <p>
-    A community-led rewilding initiative focused on biodiversity,
-    education, and green regeneration in Aston.
+    A local initiative restoring biodiversity, reconnecting people with nature,
+    and transforming underused land into thriving green space.
   </p>
 </section>
 
-<section class="section">
-  <h2>Impact</h2>
-  <div class="cards">
-    <div class="card">🌱 Native planting</div>
-    <div class="card">🦋 Wildlife recovery</div>
-    <div class="card">👥 Community action</div>
-  </div>
-</section>
-
-<section class="section" id="events">
+<section id="events">
   <h2>Upcoming Events</h2>
   <div id="events-container">
     <p>Loading events…</p>
@@ -49,15 +40,15 @@
 <script src="script.js"></script>
 
 <script>
-if (window.netlifyIdentity) {
-  window.netlifyIdentity.on("init", user => {
-    if (!user) {
-      window.netlifyIdentity.on("login", () => {
-        document.location.href = "/admin/";
-      });
-    }
-  });
-}
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
 </script>
 
 </body>

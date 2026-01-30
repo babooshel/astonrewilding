@@ -1,8 +1,12 @@
 :root {
-  --green: #2f8f4e;
-  --blue: #1da1f2;
-  --yellow: #f4c430;
-  --bg: #f4f7f6;
+  --green: #2f8f5b;
+  --blue: #4fa3ff;
+  --yellow: #ffd166;
+  --bg: #f5f7f6;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -13,49 +17,43 @@ body {
 }
 
 .hero {
-  background: linear-gradient(120deg, var(--green), var(--blue));
-  color: white;
   padding: 4rem 2rem;
   text-align: center;
+  color: white;
+  background: linear-gradient(120deg, var(--green), var(--blue));
 }
 
 .btn {
   display: inline-block;
   margin-top: 1rem;
-  background: var(--yellow);
-  color: black;
   padding: 0.7rem 1.3rem;
-  border-radius: 999px;
+  background: var(--yellow);
+  color: #000;
   text-decoration: none;
+  border-radius: 999px;
   font-weight: 600;
 }
 
-.section {
-  max-width: 1000px;
+section {
+  max-width: 900px;
   margin: auto;
   padding: 3rem 2rem;
 }
 
-.cards {
+#events-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
 
-.card {
+.event-card {
   background: white;
   padding: 1.5rem;
-  border-radius: 12px;
+  border-radius: 14px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  transition: transform 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-6px);
 }
 
 footer {
   text-align: center;
   padding: 2rem;
-  background: #e6ebe8;
+  background: #e9ecea;
 }
