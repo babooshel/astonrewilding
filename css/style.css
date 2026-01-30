@@ -3,28 +3,15 @@ body { margin: 0; font-family: system-ui, sans-serif; background: #f4f9f4; color
 
 /* NAV */
 .top-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: white;
-  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 2rem; background: white; box-shadow: 0 4px 20px rgba(0,0,0,.06);
 }
 .top-nav .links a { margin-right: 1rem; text-decoration: none; color: #1b3b2d; font-weight: 500; }
-.top-nav button {
-  background: #2f7d4e; color: white; border: none; padding: .5rem .9rem; border-radius: 8px; cursor: pointer;
-}
+.top-nav button { background: #2f7d4e; color: white; border: none; padding: .5rem .9rem; border-radius: 8px; cursor: pointer; }
 
 /* HERO */
-.hero {
-  padding: 6rem 2rem;
-  text-align: center;
-  background: linear-gradient(135deg,#2f7d4e,#8bcf9c);
-  color: white;
-}
+.hero { padding: 6rem 2rem; text-align: center; background: linear-gradient(135deg,#2f7d4e,#8bcf9c); color: white; }
 .hero-content { max-width: 900px; margin: auto; }
 .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
 .hero p { font-size: 1.2rem; margin-bottom: .8rem; line-height: 1.6; }
@@ -34,16 +21,14 @@ section { max-width: 1000px; margin: auto; padding: 3rem 2rem; }
 section h2 { margin-bottom: 1.5rem; font-size: 2rem; }
 
 /* CARDS */
-.card {
-  background: white;
-  border-radius: 16px;
-  padding: 1.8rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
-  margin-bottom: 1.5rem;
-}
-
+.card { background: white; border-radius: 16px; padding: 1.8rem; box-shadow: 0 10px 30px rgba(0,0,0,.08); margin-bottom: 1.5rem; }
 #eventsList .card { transition: transform .2s ease; }
 #eventsList .card:hover { transform: scale(1.02); }
+
+/* MODAL */
+.modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+         background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+.hidden { display: none; }
 
 /* Responsive */
 @media (max-width: 768px) {

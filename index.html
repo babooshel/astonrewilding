@@ -7,7 +7,6 @@
 </head>
 <body>
 
-<!-- TOP NAV -->
 <nav class="top-nav">
   <div class="logo">Aston Rewilding</div>
   <div class="links">
@@ -46,11 +45,40 @@
   <div class="card" id="announcement"></div>
 </section>
 
+<!-- INLINE ADMIN LOGIN -->
+<div id="adminLoginModal" class="modal hidden">
+  <h3>Admin Login</h3>
+  <input id="loginEmail" type="email" placeholder="Email">
+  <input id="loginPassword" type="password" placeholder="Password">
+  <button id="loginBtn">Login</button>
+  <button id="closeLogin">Close</button>
+</div>
+
 <script type="module" src="/js/public.js"></script>
-<script>
-  document.getElementById("adminBtn").onclick = () => {
-    location.href = "/admin.html";
+<script type="module">
+  import { supabase } from './js/supabase.js';
+
+  const adminBtn = document.getElementById("adminBtn");
+  const modal = document.getElementById("adminLoginModal");
+  const closeBtn = document.getElementById("closeLogin");
+  const loginBtn = document.getElementById("loginBtn");
+
+  adminBtn.onclick = () => modal.classList.remove("hidden");
+  closeBtn.onclick = () => modal.classList.add("hidden");
+
+  loginBtn.onclick = async () => {
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) alert(error.message);
+    else {
+      modal.classList.add("hidden");
+      alert("Logged in! Redirecting to Admin Panel...");
+      window.location.href = "/admin.html";
+    }
   };
 </script>
+
 </body>
 </html>

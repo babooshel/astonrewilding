@@ -2,20 +2,42 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Admin</title>
+  <title>Admin Dashboard</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-<section>
-  <h2>Admin Panel</h2>
+<section class="admin-panel">
+  <h1>Admin Dashboard</h1>
 
-  <input id="title" placeholder="Event title"><br><br>
-  <input id="date" placeholder="Date"><br><br>
-  <textarea id="desc" placeholder="Description"></textarea><br><br>
-  <button id="add">Add Event</button>
+  <!-- HERO -->
+  <h2>Hero Section</h2>
+  <input id="hero_title" placeholder="Hero Title"><br><br>
+  <input id="hero_sub" placeholder="Hero Subtitle"><br><br>
+  <textarea id="hero_desc" placeholder="Hero Description"></textarea><br><br>
 
-  <div id="events"></div>
+  <!-- ABOUT -->
+  <h2>About Section</h2>
+  <textarea id="about" placeholder="About text"></textarea><br><br>
+
+  <!-- ANNOUNCEMENT -->
+  <h2>Announcement / Updates</h2>
+  <textarea id="announcement" placeholder="Announcement text"></textarea><br><br>
+
+  <button id="saveContent">Save All Content</button>
+
+  <hr>
+
+  <!-- EVENTS -->
+  <h2>Events</h2>
+  <input id="title" placeholder="Event Title"><br><br>
+  <input id="date" placeholder="Event Date"><br><br>
+  <textarea id="description" placeholder="Event Description"></textarea><br><br>
+  <button id="addEvent">Add Event</button>
+
+  <h3>Existing Events</h3>
+  <div id="eventsList"></div>
+
 </section>
 
 <script type="module" src="/js/admin.js"></script>
