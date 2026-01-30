@@ -1,28 +1,15 @@
-<ul id="events"></ul>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Events</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
 
-<script type="module">
-import { supabase } from "/js/supabase.js";
+<header><h1>Events</h1></header>
+<section id="events"></section>
 
-const list = document.getElementById("events");
-
-function render(events) {
-  list.innerHTML = events.map(e =>
-    `<li><b>${e.title}</b> – ${e.description}</li>`
-  ).join("");
-}
-
-async function load() {
-  const { data } = await supabase.from("events").select("*").order("date");
-  render(data);
-}
-
-supabase
-  .channel("events")
-  .on("postgres_changes",
-    { event: "*", schema: "public", table: "events" },
-    load
-  )
-  .subscribe();
-
-load();
-</script>
+<script type="module" src="/js/events.js"></script>
+</body>
+</html>

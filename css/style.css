@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f4f9f4;
+  color: #1b3a2b;
+}
+
+header {
+  padding: 1.2rem 2rem;
+  background: linear-gradient(120deg, #2f7d4e, #6fbf8f);
+  color: white;
+}
+
+section {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  padding: .6rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #2f7d4e;
+  color: white;
+  cursor: pointer;
+}
