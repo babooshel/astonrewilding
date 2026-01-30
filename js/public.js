@@ -1,20 +1,22 @@
 import { supabase } from "./supabase.js";
 
-// Load site content
+// Load content
 const { data: content } = await supabase.from("content").select("*");
+
+// Map content keys to sections
 content.forEach(c => {
   const el = document.getElementById(c.key);
   if (el) el.innerText = c.value;
 });
 
-// Load events
+// Events
 const { data: events } = await supabase
   .from("events")
   .select("*")
-  .order("created_at", { ascending: false });
+  .order("created_at",{ ascending: false });
 
 document.getElementById("eventsList").innerHTML =
-  events.map(e => `
+  events.map(e=>`
     <div class="card">
       <h3>${e.title}</h3>
       <strong>${e.date}</strong>

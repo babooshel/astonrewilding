@@ -11,6 +11,7 @@
 <nav class="top-nav">
   <div class="logo">Aston Rewilding</div>
   <div class="links">
+    <a href="#hero">Home</a>
     <a href="#about">About</a>
     <a href="#events">Events</a>
     <a href="#updates">Updates</a>
@@ -19,15 +20,12 @@
 </nav>
 
 <!-- HERO -->
-<header class="hero">
-  <h1 id="hero_title"></h1>
-  <p id="hero_sub"></p>
-</header>
-
-<!-- ANNOUNCEMENT -->
-<section id="updates">
-  <h2>Updates</h2>
-  <div class="card" id="announcement"></div>
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <h1 id="hero_title"></h1>
+    <p id="hero_sub"></p>
+    <p id="hero_desc"></p>
+  </div>
 </section>
 
 <!-- ABOUT -->
@@ -42,12 +40,17 @@
   <div id="eventsList"></div>
 </section>
 
+<!-- ANNOUNCEMENT -->
+<section id="updates">
+  <h2>Latest Updates</h2>
+  <div class="card" id="announcement"></div>
+</section>
+
 <script type="module" src="/js/public.js"></script>
 <script>
   document.getElementById("adminBtn").onclick = () => {
     location.href = "/admin.html";
   };
 </script>
-
 </body>
 </html>
