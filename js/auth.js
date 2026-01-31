@@ -1,8 +1,15 @@
 import { supabase } from "./supabase.js";
 
-document.getElementById("login").onclick = async () => {
-  const email = email.value;
-  const password = password.value;
+const form = document.getElementById("login-form");
+const errorBox = document.getElementById("login-error");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  errorBox.textContent = "Logging in...";
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
   const { error } = await supabase.auth.signInWithPassword({
     email,
@@ -10,8 +17,9 @@ document.getElementById("login").onclick = async () => {
   });
 
   if (error) {
-    msg.textContent = error.message;
-  } else {
-    window.location.href = "admin-dashboard.html";
+    errorBox.textContent = error.message;
+    return;
   }
-};
+
+  window.location.href = "admin-dashboard.html";
+});

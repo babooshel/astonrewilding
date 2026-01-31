@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Admin Login</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<main>
+<nav>
+  <a href="index.html">Home</a>
+</nav>
+
+<main class="login-box">
   <h1>Admin Login</h1>
 
-  <input id="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
-  <button id="login">Login</button>
+  <form id="login-form">
+    <input id="email" type="email" placeholder="Email" required>
+    <input id="password" type="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
 
-  <p id="msg"></p>
+  <p id="login-error"></p>
 </main>
 
 <script type="module" src="js/auth.js"></script>
