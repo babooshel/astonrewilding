@@ -1,33 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>News – Aston Rewilding</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <title>News</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 <header>
   <nav>
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/events.html">Events</a>
-    <a href="/news.html">News</a>
-    <button id="adminBtn">Admin</button>
+    <a href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="events.html">Events</a>
   </nav>
 </header>
 
 <main>
-  <h2>Latest News</h2>
-  <div id="news-container"></div>
+  <h1>Latest News</h1>
+  <div id="news-list"></div>
 </main>
 
 <script type="module" src="js/news.js"></script>
-<script type="module" src="/js/supabase.js"></script>
-<script type="module" src="/js/public.js"></script>
-<script>
-document.getElementById('adminBtn').onclick = () => {
-  location.href = '/admin.html';
-};
-</script>
 </body>
 </html>
