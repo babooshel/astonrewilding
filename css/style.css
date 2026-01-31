@@ -39,3 +39,15 @@ input, textarea {
   margin-bottom: 0.5rem;
   padding: 0.5rem;
 }
+section {
+  background: #fff;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+
+article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
