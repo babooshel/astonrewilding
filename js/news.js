@@ -1,6 +1,6 @@
 import { supabase } from "./supabase.js";
 
-const container = document.getElementById("news-container");
+const newsContainer = document.getElementById("news-container");
 
 async function loadNews() {
   const { data, error } = await supabase
@@ -9,24 +9,22 @@ async function loadNews() {
     .order("created_at", { ascending: false });
 
   if (error) {
-    container.innerHTML = "<p>Failed to load news.</p>";
+    newsContainer.innerHTML = "<p>Failed to load news.</p>";
     console.error(error);
     return;
   }
 
   if (!data || data.length === 0) {
-    container.innerHTML = "<p>No news available.</p>";
+    newsContainer.innerHTML = "<p>No news available.</p>";
     return;
   }
 
-  container.innerHTML = "";
+  newsContainer.innerHTML = "";
 
   data.forEach(item => {
     const title = item.title ?? "Untitled";
     const body = item.body ?? "";
-    const date = item.created_at
-      ? new Date(item.created_at).toLocaleDateString()
-      : "";
+    const date = item.created_at ? new Date(item.created_at).toLocaleDateString() : "";
 
     const article = document.createElement("article");
     article.innerHTML = `
@@ -35,7 +33,7 @@ async function loadNews() {
       <small>${date}</small>
     `;
 
-    container.appendChild(article);
+    newsContainer.appendChild(article);
   });
 }
 
