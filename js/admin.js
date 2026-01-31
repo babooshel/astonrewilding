@@ -44,26 +44,26 @@ window.deleteEvent = async (id) => {
 };
 
 // ---------- ADD ----------
-add-news.onclick = async () => {
+document.getElementById("add-news").onclick = async () => {
   await supabase.from("news").insert({
-    title: news-title.value,
-    date: news-date.value,
-    body: news-body.value
+    title: document.getElementById("news-title").value,
+    date: document.getElementById("news-date").value,
+    body: document.getElementById("news-body").value
   });
   loadAdmin();
 };
 
-add-event.onclick = async () => {
+document.getElementById("add-event").onclick = async () => {
   await supabase.from("events").insert({
-    title: event-title.value,
-    date: event-date.value,
-    description: event-desc.value
+    title: document.getElementById("event-title").value,
+    date: document.getElementById("event-date").value,
+    description: document.getElementById("event-desc").value
   });
   loadAdmin();
 };
 
 // ---------- LOGOUT ----------
-logout.onclick = async () => {
+document.getElementById("logout").onclick = async () => {
   await supabase.auth.signOut();
   window.location.href = "index.html";
 };
