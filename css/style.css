@@ -52,3 +52,14 @@ input, textarea {
   border-radius: 6px;
   border: 1px solid #ccc;
 }
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+li button {
+  background: #991b1b;
+}
