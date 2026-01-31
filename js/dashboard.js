@@ -3,45 +3,95 @@ import { requireAdmin } from "./auth.js";
 
 await requireAdmin();
 
-/* ---------- LOGOUT ---------- */
-logout.onclick = async () => {
+// ELEMENTS
+const eventList = document.getElementById("event-list");
+const newsList = document.getElementById("news-list");
+
+const eventTitle = document.getElementById("event-title");
+const eventDate = document.getElementById("event-date");
+const eventDesc = document.getElementById("event-desc");
+
+const newsTitle = document.getElementById("news-title");
+const newsContent = document.getElementById("news-content");
+
+const logoutBtn = document.getElementById("logout");
+const addEventBtn = document.getElementById("add-event");
+const addNewsBtn = document.getElementById("add-news");
+
+// LOGOUT
+logoutBtn.onclick = async () => {
   await supabase.auth.signOut();
   location.href = "admin.html";
 };
 
-/* ---------- LOAD DATA ---------- */
+// LOAD EVENTS
 async function loadEvents() {
-  const { data } = await supabase.from("events").select("*").order("date");
+  const { data, error } = await supabase
+    .from("events")
+    .select("*")
+    .order("date", { ascending: true });
+
   eventList.innerHTML = "";
 
-  data.forEach(e => {
+  if (error) {
+    eventList.innerHTML = "<li>Error loading events</li>";
+    return;
+  }
+
+  if (!data.length) {
+    eventList.innerHTML = "<li>No events yet</li>";
+    return;
+  }
+
+  data.forEach(event => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <strong>${e.title}</strong> (${e.date})
-      <button data-id="${e.id}">Delete</button>
+      <span>
+        <strong>${event.title}</strong><br>
+        <small>${event.date}</small>
+      </span>
+      <button data-id="${event.id}">Delete</button>
     `;
-    li.querySelector("button").onclick = () => deleteEvent(e.id);
+
+    li.querySelector("button").onclick = () => deleteEvent(event.id);
     eventList.appendChild(li);
   });
 }
 
+// LOAD NEWS
 async function loadNews() {
-  const { data } = await supabase.from("news").select("*").order("created_at", { ascending: false });
+  const { data, error } = await supabase
+    .from("news")
+    .select("*")
+    .order("created_at", { ascending: false });
+
   newsList.innerHTML = "";
 
-  data.forEach(n => {
+  if (error) {
+    newsList.innerHTML = "<li>Error loading news</li>";
+    return;
+  }
+
+  if (!data.length) {
+    newsList.innerHTML = "<li>No news yet</li>";
+    return;
+  }
+
+  data.forEach(item => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <strong>${n.title}</strong>
-      <button data-id="${n.id}">Delete</button>
+      <span><strong>${item.title}</strong></span>
+      <button data-id="${item.id}">Delete</button>
     `;
-    li.querySelector("button").onclick = () => deleteNews(n.id);
+    li.querySelector("button").onclick = () => deleteNews(item.id);
     newsList.appendChild(li);
   });
 }
 
-/* ---------- ADD ---------- */
-addEvent.onclick = async () => {
+// ADD EVENT
+addEventBtn.onclick = async () => {
+  if (!eventTitle.value || !eventDate.value) return alert("Missing fields");
+
   await supabase.from("events").insert({
     title: eventTitle.value,
     date: eventDate.value,
@@ -55,7 +105,10 @@ addEvent.onclick = async () => {
   loadEvents();
 };
 
-addNews.onclick = async () => {
+// ADD NEWS
+addNewsBtn.onclick = async () => {
+  if (!newsTitle.value || !newsContent.value) return alert("Missing fields");
+
   await supabase.from("news").insert({
     title: newsTitle.value,
     content: newsContent.value
@@ -67,7 +120,7 @@ addNews.onclick = async () => {
   loadNews();
 };
 
-/* ---------- DELETE ---------- */
+// DELETE
 async function deleteEvent(id) {
   if (!confirm("Delete this event?")) return;
   await supabase.from("events").delete().eq("id", id);
@@ -80,6 +133,6 @@ async function deleteNews(id) {
   loadNews();
 }
 
-/* ---------- INIT ---------- */
+// INIT
 loadEvents();
 loadNews();
