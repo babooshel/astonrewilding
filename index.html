@@ -1,40 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Aston Rewilding Hub</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <title>Aston Rewilding</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/events.html">Events</a>
-    <a href="/news.html">News</a>
-    <a href="/admin.html">Admin</a>
-    <button id="adminBtn">Admin Login</button>
-    
 
+<header>
+  <h1>Aston Rewilding Hub</h1>
+  <nav>
+    <a href="about.html">About</a>
+    <a href="events.html">Events</a>
+    <a href="news.html">News</a>
+    <a href="contact.html">Contact</a>
+    <a href="admin.html">Admin</a>
   </nav>
-  <h1 id="home-title">Aston Rewilding Hub</h1>
 </header>
 
-<section id="home-banner" class="card">
-  <p id="home-banner-text">Community-powered environmental restoration near Aston, Birmingham.</p>
-</section>
+<main>
+  <section>
+    <h2>Rewilding Aston</h2>
+    <p>Restoring nature, empowering the community, building a greener future.</p>
+  </section>
 
-<section id="home-intro" class="card">
-  <h2>Welcome</h2>
-  <p id="home-intro-text"></p>
-</section>
+  <section>
+    <h2>What We Do</h2>
+    <ul>
+      <li>Urban rewilding projects</li>
+      <li>Community events</li>
+      <li>Education & volunteering</li>
+    </ul>
+  </section>
+</main>
 
-<script type="module" src="/js/supabase.js"></script>
-<script type="module" src="/js/public.js"></script>
-<script>
-document.getElementById('adminBtn').onclick = () => {
-  location.href = '/admin.html';
-};
-</script>
 </body>
 </html>

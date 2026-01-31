@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Admin | Aston Rewilding</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Login</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<main>
+  <section>
+    <h2>Admin Login</h2>
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <button id="login">Login</button>
+    <p id="status"></p>
+  </section>
+</main>
 
-<h1>Aston Rewilding – Admin</h1>
+<script type="module">
+import { supabase } from "./js/supabase.js";
 
-<p id="status"></p>
+document.getElementById("login").onclick = async () => {
+  const email = email.value;
+  const password = password.value;
 
-<!-- LOGIN FORM -->
-<div id="login-box" style="display:none;">
-  <h2>Admin Login</h2>
-  <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
-  <button id="login-btn">Login</button>
-</div>
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) return status.textContent = "Login failed";
 
-<!-- ADMIN DASHBOARD -->
-<div id="admin-panel" style="display:none;">
-  <h2>Admin Dashboard</h2>
-  <p>You are logged in as admin.</p>
-  <button id="logout-btn">Logout</button>
-</div>
-
-<script type="module" src="js/admin.js"></script>
+  window.location.href = "dashboard.html";
+};
+</script>
 </body>
 </html>

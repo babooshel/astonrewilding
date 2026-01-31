@@ -1,59 +1,54 @@
-/* Shared site styles */
+* { box-sizing: border-box; margin: 0; font-family: system-ui; }
+
 body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-  background: #f8f9f8;
-  color: #222;
+  background: #f4f7f5;
+  color: #1f2933;
 }
 
-header, footer {
-  background: #1f4d2a;
+header {
+  background: #14532d;
   color: white;
-  padding: 1rem 2rem;
+  padding: 1.2rem;
 }
 
 nav {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-a {
+nav a {
   color: white;
   text-decoration: none;
   font-weight: 500;
 }
 
-section {
-  padding: 2rem;
+main {
   max-width: 900px;
   margin: auto;
+  padding: 2rem;
 }
 
-h1, h2 {
-  color: #1f4d2a;
-}
-
-.card {
+section {
   background: white;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+button {
+  background: #166534;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 input, textarea {
   width: 100%;
-  padding: 0.7rem;
-  margin: 0.5rem 0;
-  border: 1px solid #888;
+  padding: 0.6rem;
+  margin-bottom: 0.8rem;
   border-radius: 6px;
-}
-
-button {
-  background: #1f4d2a;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  border: 1px solid #ccc;
 }
