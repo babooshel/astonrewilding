@@ -1,31 +1,32 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin – Aston Rewilding</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <title>Admin | Aston Rewilding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<section id="admin-section" class="card" style="display:none;">
+
+<h1>Aston Rewilding – Admin</h1>
+
+<p id="status"></p>
+
+<!-- LOGIN FORM -->
+<div id="login-box" style="display:none;">
+  <h2>Admin Login</h2>
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button id="login-btn">Login</button>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="admin-panel" style="display:none;">
   <h2>Admin Dashboard</h2>
+  <p>You are logged in as admin.</p>
+  <button id="logout-btn">Logout</button>
+</div>
 
-  <h3>Edit Pages</h3>
-  <textarea id="home-intro"></textarea>
-  <textarea id="about"></textarea>
-  <button id="save-pages">Save Pages</button>
-
-  <h3>Manage Events</h3>
-  <div id="admin-events"></div>
-  <button id="add-event">Add Event</button>
-
-  <h3>Manage News</h3>
-  <div id="admin-news"></div>
-  <button id="add-news">Add News</button>  
-
-  <button id="logout">Logout</button>
-</section>
-
-<script type="module" src="/js/supabase.js"></script>
-<script type="module" src="/js/admin.js"></script>
+<script type="module" src="js/admin.js"></script>
 </body>
 </html>
