@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Aston Rewilding</title>
+  <title>Aston Rewilding Hub</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<script type="module">
-import { isLoggedIn } from "./js/session.js";
-if (await isLoggedIn()) {
-  document.getElementById("admin-link").href = "admin-dashboard.html";
-}
-</script>
 <body>
 
 <header>
   <nav>
     <a href="index.html">Home</a>
-    <a href="news.html">News</a>
     <a href="events.html">Events</a>
     <a href="admin-login.html" id="admin-link">Admin</a>
   </nav>
-
 </header>
 
 <main>
-  <h1>Welcome to Aston Rewilding</h1>
-  <p>Community-led nature restoration and local events.</p>
+  <h1>Welcome to Aston Rewilding Hub</h1>
+  <p>Community-led nature restoration near Aston, Birmingham.</p>
 </main>
+
+<script type="module">
+import { isLoggedIn } from "./js/session.js";
+(async () => {
+  if (await isLoggedIn()) {
+    document.getElementById("admin-link").href = "admin-dashboard.html";
+  }
+})();
+</script>
 
 </body>
 </html>

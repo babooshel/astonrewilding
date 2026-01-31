@@ -22,11 +22,19 @@ main {
   margin: auto;
 }
 
-article {
+section {
   background: white;
   padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+
+article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
 }
 
 button {
@@ -38,16 +46,4 @@ input, textarea {
   width: 100%;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
-}
-section {
-  background: #fff;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border-radius: 8px;
-}
-
-article {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }

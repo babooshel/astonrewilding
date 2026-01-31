@@ -10,26 +10,21 @@
   <h1>Admin Dashboard</h1>
 
   <section>
-    <h2>News</h2>
-    <div id="news-admin"></div>
-
-    <h3>Add News</h3>
-    <input id="news-title" placeholder="Title">
-    <input id="news-date" placeholder="Date">
-    <textarea id="news-body" placeholder="Body"></textarea>
-    
-    <button type="button" id="add-news">Add News</button>
-  </section>
-
-  <section>
     <h2>Events</h2>
     <div id="events-admin"></div>
 
     <h3>Add Event</h3>
     <input id="event-title" placeholder="Title">
-    <input id="event-date" placeholder="Date">
+    <input id="event-date" type="date" placeholder="Date">
     <textarea id="event-desc" placeholder="Description"></textarea>
     <button type="button" id="add-event">Add Event</button>
+  </section>
+
+  <section>
+    <h2>Upload Weekly PDF</h2>
+    <input type="file" id="weekly-pdf" accept="application/pdf">
+    <button type="button" id="upload-pdf">Upload PDF</button>
+    <p id="pdf-msg"></p>
   </section>
 
   <button type="button" id="logout">Logout</button>

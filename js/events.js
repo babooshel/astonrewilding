@@ -5,7 +5,7 @@ const list = document.getElementById("events-list");
 async function loadEvents() {
   const { data, error } = await supabase
     .from("events")
-    .select("title, date, description")
+    .select("id, title, date, description")
     .order("created_at", { ascending: false });
 
   if (error) {
