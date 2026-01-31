@@ -1,71 +1,82 @@
 import { supabase } from "./supabase.js";
 
-const session = await supabase.auth.getSession();
-if (!session.data.session) {
-  window.location.href = "admin-login.html";
-}
+document.addEventListener("DOMContentLoaded", async () => {
 
-// ---------- LOAD ----------
-async function loadAdmin() {
-  const newsBox = document.getElementById("news-admin");
-  const eventsBox = document.getElementById("events-admin");
+  const { data: session } = await supabase.auth.getSession();
+  if (!session.session) {
+    window.location.href = "admin-login.html";
+    return;
+  }
 
-  const { data: news } = await supabase.from("news").select("*");
-  const { data: events } = await supabase.from("events").select("*");
+  // -------- ELEMENTS --------
+  const newsTitle = document.getElementById("news-title");
+  const newsDate = document.getElementById("news-date");
+  const newsBody = document.getElementById("news-body");
+  const addNewsBtn = document.getElementById("add-news");
 
-  newsBox.innerHTML = "";
-  eventsBox.innerHTML = "";
+  const eventTitle = document.getElementById("event-title");
+  const eventDate = document.getElementById("event-date");
+  const eventDesc = document.getElementById("event-desc");
+  const addEventBtn = document.getElementById("add-event");
 
-  news.forEach(n => {
-    newsBox.innerHTML += `
-      <article>
-        <strong>${n.title}</strong>
-        <button onclick="deleteNews('${n.id}')">Delete</button>
-      </article>`;
+  const logoutBtn = document.getElementById("logout");
+
+  // -------- ADD NEWS --------
+  addNewsBtn.addEventListener("click", async () => {
+    if (!newsTitle.value || !newsBody.value) {
+      alert("News title and body required");
+      return;
+    }
+
+    const { error } = await supabase.from("news").insert({
+      title: newsTitle.value,
+      body: newsBody.value,
+      date: newsDate.value
+    });
+
+    if (error) {
+      alert("Failed to add news");
+      console.error(error);
+      return;
+    }
+
+    alert("News added");
+
+    newsTitle.value = "";
+    newsBody.value = "";
+    newsDate.value = "";
   });
 
-  events.forEach(e => {
-    eventsBox.innerHTML += `
-      <article>
-        <strong>${e.title}</strong>
-        <button onclick="deleteEvent('${e.id}')">Delete</button>
-      </article>`;
+  // -------- ADD EVENT --------
+  addEventBtn.addEventListener("click", async () => {
+    if (!eventTitle.value || !eventDesc.value) {
+      alert("Event title and description required");
+      return;
+    }
+
+    const { error } = await supabase.from("events").insert({
+      title: eventTitle.value,
+      description: eventDesc.value,
+      date: eventDate.value
+    });
+
+    if (error) {
+      alert("Failed to add event");
+      console.error(error);
+      return;
+    }
+
+    alert("Event added");
+
+    eventTitle.value = "";
+    eventDesc.value = "";
+    eventDate.value = "";
   });
-}
 
-window.deleteNews = async (id) => {
-  await supabase.from("news").delete().eq("id", id);
-  loadAdmin();
-};
-
-window.deleteEvent = async (id) => {
-  await supabase.from("events").delete().eq("id", id);
-  loadAdmin();
-};
-
-// ---------- ADD ----------
-document.getElementById("add-news").onclick = async () => {
-  await supabase.from("news").insert({
-    title: document.getElementById("news-title").value,
-    date: document.getElementById("news-date").value,
-    body: document.getElementById("news-body").value
+  // -------- LOGOUT --------
+  logoutBtn.addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    window.location.href = "index.html";
   });
-  loadAdmin();
-};
 
-document.getElementById("add-event").onclick = async () => {
-  await supabase.from("events").insert({
-    title: document.getElementById("event-title").value,
-    date: document.getElementById("event-date").value,
-    description: document.getElementById("event-desc").value
-  });
-  loadAdmin();
-};
-
-// ---------- LOGOUT ----------
-document.getElementById("logout").onclick = async () => {
-  await supabase.auth.signOut();
-  window.location.href = "index.html";
-};
-
-loadAdmin();
+});

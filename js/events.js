@@ -2,17 +2,28 @@ import { supabase } from "./supabase.js";
 
 const list = document.getElementById("events-list");
 
-const { data } = await supabase
-  .from("events")
-  .select("*")
-  .order("created_at", { ascending: false });
+async function loadEvents() {
+  const { data, error } = await supabase
+    .from("events")
+    .select("title, date, description")
+    .order("created_at", { ascending: false });
 
-data.forEach(e => {
-  list.innerHTML += `
-    <article>
-      <h3>${e.title}</h3>
-      <small>${e.date}</small>
-      <p>${e.description}</p>
-    </article>
-  `;
-});
+  if (error) {
+    list.innerHTML = "<p>Failed to load events.</p>";
+    return;
+  }
+
+  list.innerHTML = "";
+
+  data.forEach(e => {
+    list.innerHTML += `
+      <article>
+        <h3>${e.title}</h3>
+        <small>${e.date}</small>
+        <p>${e.description}</p>
+      </article>
+    `;
+  });
+}
+
+loadEvents();
