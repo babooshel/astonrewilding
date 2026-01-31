@@ -1,33 +1,41 @@
 import { supabase } from "./supabase.js";
 
-const newsContainer = document.getElementById("news-container");
+const container = document.getElementById("news-container");
 
 async function loadNews() {
   const { data, error } = await supabase
     .from("news")
-    .select("*")
+    .select("id, title, body, created_at")
     .order("created_at", { ascending: false });
 
   if (error) {
-    newsContainer.textContent = "Failed to load news";
+    container.innerHTML = "<p>Failed to load news.</p>";
+    console.error(error);
     return;
   }
 
-  if (!data.length) {
-    newsContainer.textContent = "No news yet";
+  if (!data || data.length === 0) {
+    container.innerHTML = "<p>No news available.</p>";
     return;
   }
 
-  newsContainer.innerHTML = "";
+  container.innerHTML = "";
 
   data.forEach(item => {
+    const title = item.title ?? "Untitled";
+    const body = item.body ?? "";
+    const date = item.created_at
+      ? new Date(item.created_at).toLocaleDateString()
+      : "";
+
     const article = document.createElement("article");
     article.innerHTML = `
-      <h3>${item.title}</h3>
-      <p>${item.body}</p>
-      <small>${new Date(item.created_at).toLocaleDateString()}</small>
+      <h3>${title}</h3>
+      <p>${body}</p>
+      <small>${date}</small>
     `;
-    newsContainer.appendChild(article);
+
+    container.appendChild(article);
   });
 }
 
