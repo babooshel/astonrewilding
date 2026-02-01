@@ -1,34 +1,60 @@
+/* General Reset & Body */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: #f5f5f5;
+  background: linear-gradient(135deg, #d0f0c0, #f0ffe0);
+  color: #333;
 }
 
+/* Header & Navigation */
 header {
-  background: #1e293b;
-  color: white;
-  padding: 1rem;
+  background: #2a5d34;
+  color: #fff;
+  padding: 1rem 2rem;
 }
 
 nav a {
-  color: white;
+  color: #fff;
   margin-right: 1rem;
   text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
+nav a:hover {
+  color: #cce4cc;
+}
+
+/* Main content area */
 main {
   padding: 2rem;
   max-width: 900px;
   margin: auto;
+  text-align: center;
 }
 
-section {
-  background: white;
-  padding: 1rem;
+main h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+main p {
+  font-size: 1.2rem;
   margin-bottom: 2rem;
-  border-radius: 8px;
+  line-height: 1.6;
 }
 
+/* Sections (like About, Events) */
+section {
+  background: #ffffffcc;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+/* Articles inside sections (like events) */
 article {
   display: flex;
   justify-content: space-between;
@@ -37,13 +63,49 @@ article {
   border-bottom: 1px solid #ddd;
 }
 
-button {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+article:last-child {
+  border-bottom: none;
 }
 
+/* Buttons */
+button, .cta-button {
+  padding: 0.6rem 1.2rem;
+  background: #2a5d34;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+button:hover, .cta-button:hover {
+  background: #1f4225;
+}
+
+/* Form elements */
 input, textarea {
   width: 100%;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #d0f0c0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Events page specific */
+#events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
 }
