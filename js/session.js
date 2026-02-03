@@ -1,6 +1,10 @@
 import { supabase } from "./supabase.js";
 
-export async function isLoggedIn() {
-  const { data } = await supabase.auth.getSession();
-  return !!data.session;
+export async function requireAuth() {
+  const { data, error } = await supabase.auth.getUser();
+  if (!data.user) {
+    alert("NOT LOGGED IN — upload will fail");
+    throw new Error("Not authenticated");
+  }
+  return data.user;
 }
